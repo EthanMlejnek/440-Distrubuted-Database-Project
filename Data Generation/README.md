@@ -11,7 +11,7 @@ To generate realistic data, I used the following libraries:
 
 # **table_tool.py** 
 This script creates a tool that allows you to define a table, its columns, their data types, and how data should be generated for it. Once a table is defined, you can generate the create table and 
-insert statements for that table and its data. 
+insert statements for that table and its data. If multiple tables are defined, the statements will be generated for all those tables. 
 
 ## Example Usage 
 ```python
