@@ -38,20 +38,17 @@ DROP TABLE IF EXISTS DEPARTMENT;
 DROP TABLE IF EXISTS POLICY; 
 DROP TABLE IF EXISTS BILLING; 
 
-
--- Data Generated
+-- Core Tables
 CREATE TABLE DEPARTMENT (
     department_id INT PRIMARY KEY NOT NULL, 
     department_name VARCHAR(255)
 );
 
--- Vince Data Generated
 CREATE TABLE ROLE (
     role_id INT PRIMARY KEY NOT NULL,
     role_name VARCHAR(255)
 );
 
--- Data Generated
 CREATE TABLE PERSON (
     person_id INT PRIMARY KEY NOT NULL,
     first_name VARCHAR(255),
@@ -59,74 +56,64 @@ CREATE TABLE PERSON (
     date_of_birth DATE
 );
 
--- Data Generated
 CREATE TABLE COUNTRY (
     country_id INT PRIMARY KEY NOT NULL,
     country_name VARCHAR(255) 
 );
 
--- Data Generated
 CREATE TABLE REGION_TYPE (
     region_type_id INT PRIMARY KEY NOT NULL,
     region_type VARCHAR(255) 
 );
 
--- Data Generated
 CREATE TABLE PROJECT (
     project_id INT PRIMARY KEY NOT NULL, 
     project_name VARCHAR(255) 
 );
 
--- Data Generated
 CREATE TABLE CONTRACT (
     contract_id INT PRIMARY KEY NOT NULL, 
     contract_max_hours INT,
     billing_rate DECIMAL(10, 2)
 );
 
--- Data Generated
 CREATE TABLE PHONE (
     phone_id INT PRIMARY KEY NOT NULL,
     phone_number VARCHAR(255),
     phone_type VARCHAR(255) 
 );
 
--- Data Generated
 CREATE TABLE EMAIL (
     email_id INT PRIMARY KEY NOT NULL,
     email VARCHAR(255),
     email_type VARCHAR(255)
 );
 
--- Data Generated
 CREATE TABLE INVOICE (
     invoice_id INT PRIMARY KEY NOT NULL,
     invoice_date DATE,
     invoice_status VARCHAR(255)
 );
 
--- Data Generated
 CREATE TABLE COMPANY (
     company_id INT PRIMARY KEY NOT NULL, 
     company_name VARCHAR(255),
     company_type VARCHAR(255) 
 );
 
--- Data Generated
 CREATE TABLE POLICY (
     policy_id INT PRIMARY KEY NOT NULL,
     policy_type VARCHAR(255)
 );
 
--- Data Generated
 CREATE TABLE BILLING (
     billing_id INT PRIMARY KEY NOT NULL,
     billed_hours INT,
     bill_rate DECIMAL(10, 2),
     billed_total DECIMAL(10, 2)
 );
+
 -- Start Tables with Foreign Keys
--- Data Generated
 CREATE TABLE REGION (
     region_id INT PRIMARY KEY NOT NULL, 
     region_type_id INT, 
@@ -135,7 +122,6 @@ CREATE TABLE REGION (
     FOREIGN KEY (region_type_id) REFERENCES REGION_TYPE(region_type_id)
 );
 
--- Data Generated
 CREATE TABLE EMPLOYEE (
     employee_id INT PRIMARY KEY NOT NULL,
     department_id INT,
@@ -146,7 +132,6 @@ CREATE TABLE EMPLOYEE (
     FOREIGN KEY (person_id) REFERENCES PERSON(person_id)
 );
 
--- Data Generated
 CREATE TABLE CLIENT (
     client_id INT PRIMARY KEY NOT NULL, 
     person_id INT,
@@ -156,7 +141,6 @@ CREATE TABLE CLIENT (
     FOREIGN KEY (company_id) REFERENCES COMPANY(company_id) 
 );
 
--- Data Generated 
 CREATE TABLE TIMECARD (
     timecard_id INT PRIMARY KEY NOT NULL, 
     project_id INT,
@@ -167,21 +151,18 @@ CREATE TABLE TIMECARD (
     FOREIGN KEY (country_id) REFERENCES COUNTRY(country_id) 
 );
 
--- Data Generated
 CREATE TABLE CITY (
     city_id INT PRIMARY KEY NOT NULL,
     city_name VARCHAR(255)
 );
 
--- Data Generated
 CREATE TABLE ADDRESS (
     address_id INT PRIMARY KEY NOT NULL,
     street_address VARCHAR(255),
     postal_code VARCHAR(255)
 );
 
--- Start Bridge Tables
--- Data Generated
+-- Line Item / Bridge Tables
 CREATE TABLE ADDRESS_CITY (
     address_id INT,
     city_id INT,
@@ -191,7 +172,6 @@ CREATE TABLE ADDRESS_CITY (
     FOREIGN KEY (city_id) REFERENCES CITY(city_id) 
 );
 
--- Data Generated 
 CREATE TABLE CITY_REGION (
     city_id INT,
     region_id INT,
@@ -228,7 +208,6 @@ CREATE TABLE CLIENT_INVOICE (
     FOREIGN KEY (invoice_id) REFERENCES INVOICE(invoice_id) 
 );
 
-
 CREATE TABLE COUNTRY_POLICY (
     country_id INT,
     policy_id INT,
@@ -239,7 +218,6 @@ CREATE TABLE COUNTRY_POLICY (
     FOREIGN KEY (policy_id) REFERENCES POLICY(policy_id)
 );
 
-
 CREATE TABLE CONTRACT_COUNTRY(
     contract_id INT,
     country_id INT,
@@ -249,7 +227,6 @@ CREATE TABLE CONTRACT_COUNTRY(
     FOREIGN KEY (country_id) REFERENCES COUNTRY(country_id) 
 );
 
--- Data Generated
 CREATE TABLE EMPLOYEE_ROLE (
     employee_id INT,
     role_id INT,
@@ -272,7 +249,6 @@ CREATE TABLE EMPLOYEE_TIMECARD (
     FOREIGN KEY (timecard_id) REFERENCES TIMECARD(timecard_id) 
 );
 
--- Altered: address_id shouldn't be PK if multiple addresses for a person
 CREATE TABLE PERSON_ADDRESS (
     person_id INT, 
     address_id INT,
@@ -305,7 +281,6 @@ CREATE TABLE PERSON_EMAIL (
     FOREIGN KEY (email_id) REFERENCES EMAIL(email_id) 
 );
 
--- Data Generated
 CREATE TABLE PROJECT_TASK (
     task_id INT PRIMARY KEY NOT NULL, 
     project_id INT,
@@ -314,7 +289,6 @@ CREATE TABLE PROJECT_TASK (
     FOREIGN KEY (project_id) REFERENCES PROJECT(project_id) 
 );
 
--- Data Generated
 CREATE TABLE EMPLOYEE_PROJECT_TASK (
     employee_id INT,
     task_id INT,
@@ -357,7 +331,6 @@ CREATE TABLE PROJECT_CONTRACT (
     FOREIGN KEY (contract_id) REFERENCES CONTRACT(contract_id)
 );
 
--- Data Generated
 DROP TABLE IF EXISTS `PHONE_METRICS`;
 
 CREATE TABLE `PHONE_METRICS` (
@@ -371,7 +344,6 @@ CREATE TABLE `PHONE_METRICS` (
     FOREIGN KEY (`phone_id`)
     REFERENCES `PHONE` (`phone_id`));
 
--- Data Generated
 CREATE TABLE `EMAIL_METRICS` (
   `email_metrics_id` INT NOT NULL AUTO_INCREMENT,
   `email_id` INT,
@@ -385,8 +357,6 @@ CREATE TABLE `EMAIL_METRICS` (
     REFERENCES `EMAIL` (`email_id`)
 );
 
-
--- Luke
 INSERT INTO DEPARTMENT (department_id, department_name) VALUES
 (1, 'Human Resources'),
 (2, 'Finance'),
@@ -398,7 +368,7 @@ INSERT INTO DEPARTMENT (department_id, department_name) VALUES
 (8, 'Food Service'),
 (9, 'Quality Assurance'),
 (10, 'Software Development');
--- Luke
+
 INSERT INTO ROLE (role_id, role_name) VALUES
 (1, 'Intern'),
 (2, 'Associate'),
@@ -407,7 +377,7 @@ INSERT INTO ROLE (role_id, role_name) VALUES
 (5, 'Supervisor'),
 (6, 'Director'),
 (7, 'Executive');
--- Luke
+
 INSERT INTO PERSON (person_id, first_name, last_name, date_of_birth) VALUES
 (1, 'Lauren', 'Rogers', '1971-09-01'),
 (2, 'Regina', 'Williams', '1980-04-01'),
@@ -909,19 +879,17 @@ INSERT INTO PERSON (person_id, first_name, last_name, date_of_birth) VALUES
 (498, 'Bonnie', 'Schneider', '1984-12-06'),
 (499, 'Jane', 'Thomas', '1981-10-10'),
 (500, 'Christopher', 'Martin', '1986-01-06');
--- Luke
+
 INSERT INTO COUNTRY (country_id, country_name) VALUES
 (1, 'United States'),
 (2, 'Japan'),
 (3, 'Argentina');
--- Luke
+
 INSERT INTO REGION_TYPE (region_type_id, region_type) VALUES
 (1, 'State'),
 (2, 'Prefecture'),
 (3, 'Province');
 
-
--- Luke
 INSERT INTO PROJECT (project_id, project_name) VALUES
 (1, 'Industry Year'),
 (2, 'Coach Training'),
@@ -1024,7 +992,6 @@ INSERT INTO PROJECT (project_id, project_name) VALUES
 (99, 'Couple Goals'),
 (100, 'Reasoning Speech');
 
--- Tim
 INSERT INTO CONTRACT (contract_id, contract_max_hours, billing_rate) VALUES
 (1, 119, 52),
 (2, 125, 74),
@@ -1177,7 +1144,6 @@ INSERT INTO CONTRACT (contract_id, contract_max_hours, billing_rate) VALUES
 (149, 153, 99),
 (150, 165, 64);
 
--- Tim
 INSERT INTO PHONE (phone_id, phone_number, phone_type) VALUES
 (1, '415-838-4553', 'Work'),
 (2, '612-268-3082', 'Home'),
@@ -1680,7 +1646,6 @@ INSERT INTO PHONE (phone_id, phone_number, phone_type) VALUES
 (499, '612-299-4661', 'Mobile'),
 (500, '415-722-1580', 'Home');
 
--- Tim
 INSERT INTO EMAIL (email_id, email, email_type) VALUES
 (1, 'Lauren.Rogers@email.com', 'Primary'),
 (2, 'Regina.Williams@email.com', 'Secondary'),
@@ -2183,7 +2148,6 @@ INSERT INTO EMAIL (email_id, email, email_type) VALUES
 (499, 'Jane.Thomas@email.com', 'Secondary'),
 (500, 'Christopher.Martin@email.com', 'Primary');
 
--- Tim
 INSERT INTO INVOICE (invoice_id, invoice_date, invoice_status) VALUES
 (1, '2024-05-27', 'Unpaid'),
 (2, '2025-03-03', 'Processing'),
@@ -2286,7 +2250,6 @@ INSERT INTO INVOICE (invoice_id, invoice_date, invoice_status) VALUES
 (99, '2024-08-14', 'Processing'),
 (100, '2023-12-01', 'Unpaid');
 
--- Tim
 INSERT INTO COMPANY (company_id, company_name, company_type) VALUES
 (1, 'White Inc', 'Automotive'),
 (2, 'Ryan, Smith and Williams', 'Retail'),
@@ -2339,7 +2302,6 @@ INSERT INTO COMPANY (company_id, company_name, company_type) VALUES
 (49, 'Copeland and Sons', 'Manufacturing'),
 (50, 'Hill, Tran and Miller', 'Retail');
 
--- Vince
 INSERT INTO REGION (region_id, region_type_id, region_name) VALUES
 (1, 1, 'Alabama'),
 (2, 1, 'Alaska'),
@@ -2464,7 +2426,6 @@ INSERT INTO REGION (region_id, region_type_id, region_name) VALUES
 (121, 3, 'Tucum�n');
 
 ALTER TABLE REGION ADD COLUMN country_id INT;
--- Vince
 UPDATE REGION
 SET country_id = CASE
     WHEN region_type_id = 1 THEN 1 
@@ -2474,7 +2435,6 @@ SET country_id = CASE
 END;
 
 ALTER TABLE REGION ADD CONSTRAINT fk_region_country FOREIGN KEY (country_id) REFERENCES COUNTRY (country_id);
--- Vince
 INSERT INTO EMPLOYEE (employee_id, department_id, person_id, hire_date) VALUES
 (1, 8, 198, '2022-07-12'),
 (2, 5, 76, '2024-01-27'),
@@ -2727,7 +2687,6 @@ INSERT INTO EMPLOYEE (employee_id, department_id, person_id, hire_date) VALUES
 (249, 9, 104, '2021-10-28'),
 (250, 5, 210, '2022-12-31');
 
--- Vince
 INSERT INTO CLIENT (client_id, person_id, company_id) VALUES
 (1, 251, 9),
 (2, 252, 28),
@@ -2979,7 +2938,7 @@ INSERT INTO CLIENT (client_id, person_id, company_id) VALUES
 (248, 498, 36),
 (249, 499, 25),
 (250, 500, 23);
--- Vince
+
 INSERT INTO TIMECARD (timecard_id, project_id, country_id, hours_worked) VALUES
 (1, 63, 2, 10),
 (2, 73, 3, 9),
@@ -3231,14 +3190,14 @@ INSERT INTO TIMECARD (timecard_id, project_id, country_id, hours_worked) VALUES
 (248, 7, 3, 10),
 (249, 8, 2, 11),
 (250, 9, 1, 12);
--- Vince
+
 INSERT INTO POLICY (policy_id, policy_type) VALUES
 (1, 'Work Hours Regulation'),
 (2, 'Overtime Limit'),
 (3, 'Standard Weekly Hours'),
 (4, 'Holiday Work Policy'),
 (5, 'Night Shift Limit');
--- Vince
+
 INSERT INTO CITY (city_id, city_name) VALUES
 (1, 'New York'),
 (2, 'Los Angeles'),
@@ -3332,7 +3291,6 @@ INSERT INTO CITY (city_id, city_name) VALUES
 (90, 'Tierra del Fuego'),
 (91, 'Tucum�n');
 
--- Vince
 INSERT INTO CITY_REGION (city_id, region_id) VALUES
 (1, 1),
 (2, 1),
@@ -3426,8 +3384,6 @@ INSERT INTO CITY_REGION (city_id, region_id) VALUES
 (90, 3),
 (91, 3);
 
--- Altered from 500 records to 250. 200 employee addresses and 50 client addresses.
--- Dakota
 INSERT INTO ADDRESS (address_id, street_address, postal_code) VALUES
 (1, '02120 Dean Via', '87691'),
 (2, '266 April Mews', '57854'),
@@ -3680,8 +3636,7 @@ INSERT INTO ADDRESS (address_id, street_address, postal_code) VALUES
 (249, '27664 Marsh Squares Suite 845', '09629'),
 (250, '3454 Tanner Harbors Suite 995', '60889');
 
--- Wesley Billed total should be calcuated as billed_hours * bill_rate. Updated to reflect. 
-INSERT INTO `BILLING` (`billing_id`, `billed_hours`, `bill_rate`) VALUES
+INSERT INTO BILLING (billing_id, billed_hours, bill_rate) VALUES
 (1, '92', '413.50'),
 (2, '81', '532.25'),
 (3, '49', '404.75'),
@@ -3785,7 +3740,7 @@ INSERT INTO `BILLING` (`billing_id`, `billed_hours`, `bill_rate`) VALUES
 
 UPDATE BILLING
 SET billed_total = billed_hours * bill_rate;
--- Ethan
+
 INSERT INTO ADDRESS_CITY (address_id, city_id) VALUES
 (1, 31),
 (2, 3),
@@ -3888,8 +3843,6 @@ INSERT INTO ADDRESS_CITY (address_id, city_id) VALUES
 (99, 77),
 (100, 36);
 
--- Insert values for person_phone based on person_id and phone_id 
--- Ethan
 INSERT INTO PERSON_PHONE(phone_id, person_id, phone_type, is_primary) 
 SELECT 
     phone_id, 
@@ -3905,8 +3858,6 @@ SELECT
      END) 
 FROM PHONE;
 
--- Insert values for person_email based on person_id and email_id
--- Ethan
 INSERT INTO PERSON_EMAIL(email_id, person_id, email_type, is_primary)
 SELECT 
     email_id, 
@@ -3922,8 +3873,6 @@ SELECT
      END)
 FROM EMAIL;
 
--- Insert values into person_address based on employee person_id and random address_id and address_type
--- Ethan
 INSERT INTO PERSON_ADDRESS(person_id, address_id, address_type) 
 SELECT 
     person_id,
@@ -3935,9 +3884,6 @@ SELECT
      END) AS address_type
 FROM EMPLOYEE; 
 
--- Insert values in COMPANY_LOCATION based on company_id and random address_id and address_type
--- Where address_id is not in PERSON_ADDRESS. 
--- Ethan
 INSERT INTO COMPANY_LOCATION (company_id, address_id, location_name)
 SELECT 
     company_id, 
@@ -3951,7 +3897,6 @@ SELECT
      END) AS location_name
 FROM COMPANY;
 
--- Dakota
 INSERT INTO CONTRACT_COUNTRY (contract_id, country_id) VALUES
 (1,2),
 (2,2),
@@ -3977,29 +3922,24 @@ INSERT INTO CONTRACT_COUNTRY (contract_id, country_id) VALUES
 (22,3),
 (22,1),
 (23,1);
--- Dakota
-INSERT INTO COUNTRY_POLICY (country_id, policy_id, max_weekly_hours) VALUES
 
+INSERT INTO COUNTRY_POLICY (country_id, policy_id, max_weekly_hours) VALUES
 (1, 1, 40), 
 (1, 2, 10),
 (1, 3, 40),
 (1, 4, 8), 
 (1, 5, 10), 
-
-
 (2, 1, 40),  
 (2, 2, 15),
 (2, 3, 40),  
 (2, 4, 8),   
 (2, 5, 8),  
-
-
 (3, 1, 44),
 (3, 2, 12),
 (3, 3, 44),
 (3, 4, 6),
 (3, 5, 7); 
--- Dakota
+
 INSERT INTO `PHONE_METRICS` (`phone_metrics_id`, `phone_id`, `length_of_call`, `customer_satisfaction`) VALUES
 (1, 100, '96', '-1'),
 (2, 103, '5', '-10'),
@@ -4102,8 +4042,7 @@ INSERT INTO `PHONE_METRICS` (`phone_metrics_id`, `phone_id`, `length_of_call`, `
 (99, 394, '38', '2'),
 (100, 397, '17', '2');
 
--- Dakota
-INSERT INTO `EMAIL_METRICS` (`email_metrics_id`, `email_id`, `length_of_correspondence`, `customer_satisfaction`) VALUES
+INSERT INTO EMAIL_METRICS (email_metrics_id, email_id, length_of_correspondence, customer_satisfaction) VALUES
 (1, '87', '3466', '-4'),
 (2, '32', '7901', '42'),
 (3, '38', '4615', '4'),
@@ -4205,7 +4144,6 @@ INSERT INTO `EMAIL_METRICS` (`email_metrics_id`, `email_id`, `length_of_correspo
 (99, '74', '7415', '8'),
 (100, '81', '2824', '7');
 
--- Wesley
 INSERT INTO CLIENT_INVOICE (client_id, invoice_id) VALUES
 (1, 49),
 (2, 81),
@@ -4457,7 +4395,7 @@ INSERT INTO CLIENT_INVOICE (client_id, invoice_id) VALUES
 (243, 43),
 (249, 62),
 (69, 69);
--- Wesley
+
 INSERT INTO BILLING_CONTRACT(billing_id, contract_id) VALUES
 (1, 1),
 (2, 2),
@@ -4560,7 +4498,6 @@ INSERT INTO BILLING_CONTRACT(billing_id, contract_id) VALUES
 (99, 99),
 (100, 100);
 
--- Tim
 INSERT INTO EMPLOYEE_TIMECARD(employee_id, timecard_id, timecard_date, approval_status) VALUES
 (1, 1, '2022-04-12', 'Approved'),
 (2, 2, '2020-06-03', 'Pending'),
@@ -4813,7 +4750,6 @@ INSERT INTO EMPLOYEE_TIMECARD(employee_id, timecard_id, timecard_date, approval_
 (249, 249, '2021-03-31', 'Approved'),
 (250, 250, '2021-06-23', 'Approved');
 
--- Wesley
 INSERT INTO CONTRACT (contract_id, contract_max_hours, billing_rate) VALUES
 (151, '344', '60'),
 (152, '442', '70'),
@@ -4915,7 +4851,7 @@ INSERT INTO CONTRACT (contract_id, contract_max_hours, billing_rate) VALUES
 (248, '691', '25'),
 (249, '813', '77'),
 (250, '447', '79');
--- Wesley
+
 INSERT INTO CLIENT_CONTRACT (client_id, contract_id, contract_type) VALUES
 (1, 1, 'fixed'),
 (2, 2, 'hourly'),
@@ -5167,7 +5103,7 @@ INSERT INTO CLIENT_CONTRACT (client_id, contract_id, contract_type) VALUES
 (248, 248, 'fixed'),
 (249, 249, 'hourly'),
 (250, 250, 'fixed');
--- Luke
+
 INSERT INTO PROJECT_TASK (task_id, project_id, task_description) VALUES
 (1, 1, 'Complete industry analysis'),
 (2, 1, 'Conduct market research'),
@@ -5200,7 +5136,6 @@ INSERT INTO PROJECT_TASK (task_id, project_id, task_description) VALUES
 (29, 10, 'Review institutional policies'),
 (30, 10, 'Prepare audit report');
 
--- Ethan
 INSERT INTO EMPLOYEE_ROLE (employee_id, role_id, assigned_date, end_date) VALUES
 (1, 1, '2022-07-12', '2023-07-12'),
 (2, 2, '2024-01-27', '2025-01-27'),
@@ -5229,7 +5164,6 @@ INSERT INTO EMPLOYEE_ROLE (employee_id, role_id, assigned_date, end_date) VALUES
 (25, 4, '2024-06-29', '2025-06-29'),
 (26, 5, '2023-03-26', '2024-03-26');
 
--- Wesley
 INSERT INTO EMPLOYEE_PROJECT_TASK (employee_id, task_id, task_start_date, task_end_date) VALUES
 (1, 1, '2022-07-15', '2022-08-15'),
 (2, 2, '2024-02-01', '2024-03-01'),
@@ -5256,3 +5190,5 @@ INSERT INTO EMPLOYEE_PROJECT_TASK (employee_id, task_id, task_start_date, task_e
 (23, 23, '2024-02-15', '2024-03-15'),
 (24, 24, '2021-08-01', '2021-09-01'),
 (25, 25, '2024-07-01', '2024-08-01');
+
+COMMIT; 
