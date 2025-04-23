@@ -1,3 +1,8 @@
+"""
+Written by Ethan Mlejnek 
+
+This script creates a tool used to define tables and columns and how data will be generated for them. 
+"""
 import pandas as pd 
 import mysql.connector
 from mysql.connector import Error 
