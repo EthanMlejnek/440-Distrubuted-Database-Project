@@ -1,8 +1,9 @@
 """
 Written By Ethan Mlejnek
 
-The purpose of this script is to generate realistic data for our project. 
+The purpose of this script is to generate realistic data for our project. It utilizes the table_tool script to generate data for the core tables. 
 """
+
 from table_tool import * 
 import random as rn 
 from faker import Faker 
