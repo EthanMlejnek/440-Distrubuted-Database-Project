@@ -47,3 +47,15 @@ role = bd.create_table("ROLE", {
     ("role_name", "VARCHAR"): role_name
 }, "role_id")
 ```
+
+Example Output: 
+```sql
+INSERT INTO ROLE (role_id, role_name) VALUES
+(1, 'Intern'),
+(2, 'Associate'),
+(3, 'Team Lead'),
+(4, 'Manager'),
+(5, 'Supervisor'),
+(6, 'Director'),
+(7, 'Executive');
+```
