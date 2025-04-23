@@ -132,8 +132,7 @@ GRANT ALL PRIVILEGES ON *.* TO 'username'@'%' IDENTIFIED BY 'password';
 GRANT ALL PRIVILEGES ON *.* TO 'username'@'<IP>' IDENTIFIED BY 'password';
 ```
  
-14. Stopping the MariaDB cluster
-    Always stop the other VMs before the primary one. 
+14. Stopping the MariaDB cluster **Always stop the other VMs before the primary one.** 
 ```bash
 sudo systemctl stop mariadb
 ```
