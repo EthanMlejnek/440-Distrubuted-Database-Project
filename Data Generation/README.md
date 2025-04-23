@@ -7,7 +7,7 @@ To generate realistic data, I used the following libraries:
 * random
 * Faker
 
-**All scripts written by Ethan Mlejnek** 
+***All scripts written by Ethan Mlejnek***
 
 # **table_tool.py** 
 This script creates a tool that allows you to define a table, its columns, their data types, and how data should be generated for it. Once a table is defined, you can generate the create table and 
