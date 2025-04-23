@@ -11,3 +11,11 @@ The purpose of this project was to research, design, implement,  and deploy a di
 * Populated the database with realistic mock data
 * Wrote relevant reports that would be helpful in a real world scenario 
 * Wrote stored procedures that would be helpful in a real world scenario 
+
+## Contributers: 
+* Ethan Mlejnek
+* Dakota Lahr
+* Vince Herera 
+* Wesley Sprinthall
+* Timothy Otto
+* Luke Ross
