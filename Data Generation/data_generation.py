@@ -1,3 +1,8 @@
+"""
+Written By Ethan Mlejnek
+
+The purpose of this script is to generate realistic data for our project. 
+"""
 from table_tool import * 
 import random as rn 
 from faker import Faker 
