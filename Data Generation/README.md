@@ -34,3 +34,6 @@ all_statements = bd.generate_all_statements(True)
 # Print statements directly or view them in the specifed output file.
 print(all_statements) 
 ```
+
+# data_generation.py 
+This script contains the code that utilizes the created tool to generate data for this project. 
