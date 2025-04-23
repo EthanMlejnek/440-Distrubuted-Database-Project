@@ -36,4 +36,14 @@ print(all_statements)
 ```
 
 # data_generation.py 
-This script contains the code that utilizes the created tool to generate data for this project. 
+This script contains the code that utilizes the created tool to generate data for this project. Below is an example, where data is generated for the "role" table. 
+
+```python
+role_name = ["Intern", "Associate", "Team Lead", "Manager", "Supervisor", "Director", "Executive"]
+role_id = [i for i in range(1, len(role_name) + 1)]
+
+role = bd.create_table("ROLE", {
+    ("role_id", "INT"): role_id,
+    ("role_name", "VARCHAR"): role_name
+}, "role_id")
+```
