@@ -1,6 +1,8 @@
 # MariaDB Cluster Implementation
 A deliverable for this project was to successfully configure and deploy a Distributed Database Management System (DDBMS) for a global digital marketing agency with locations in the United States, Japan, and Argentina. 
 
+**mariadb_cluster_example.PNG** show a working cluster with full replication. 
+
 Three headless Ubuntu Server virtual machines were deployed via Oracle VirtualBox: https://ubuntu.com/download/server
 
 Each virtual machine was configured with the following settings: 
