@@ -12,6 +12,8 @@ The purpose of this project was to research, design, implement,  and deploy a di
 * Wrote relevant reports that would be helpful in a real world scenario 
 * Wrote stored procedures that would be helpful in a real world scenario 
 
+* **Final Grade Received:** 196/200
+  
 ## Contributers: 
 * Ethan Mlejnek
 * Dakota Lahr
