@@ -6,5 +6,6 @@
     - Created and written by all project contributers.
   
 - ** SQL_STORED_PROCEDURES:** Contains all SQL stored procedures written for this project.
+    - Created and written by all project contributers. 
   
 - **Note:** All SQL is written in MariaDB syntax. 
