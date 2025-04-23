@@ -17,7 +17,7 @@ The purpose of this project was to research, design, implement,  and deploy a di
 ## Contributers: 
 * Ethan Mlejnek
 * Dakota Lahr
-* Vince Herera 
+* Vince Herrera 
 * Wesley Sprinthall
 * Timothy Otto
 * Luke Ross
